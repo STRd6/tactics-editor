@@ -13,3 +13,4 @@ dependencies:
   runtime: "STRd6/runtime:v0.1.1"
   sprite: "distri/sprite:v0.1.1"
   "touch-canvas": "STRd6/touch-canvas:v0.2.0"
+  "pixel-editor": "STRd6/pixel-editor:v0.1.0"

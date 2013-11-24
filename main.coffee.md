@@ -13,6 +13,10 @@ Tilesets and images too.
 
     App = require "./pixie"
 
+    {Size} = require "./lib/util"
+
+    tileSize = Size(32, 32)
+
     canvas = Canvas
       width: App.width
       height: App.height
@@ -30,8 +34,10 @@ Tilesets and images too.
 
     setTimeout ->
       sprites.forEach (sprite, i) ->
-        x = (i % 32).floor() * 32
-        y = (i / 32).floor() * 32
+        {x, y} = tileSize.mapping(i).scale(tileSize)
 
         sprite.draw canvas, x, y
     , 10
+
+    canvas.on "touch", (position) ->
+      console.log position.scale(tileSize).floor()
