@@ -40,6 +40,7 @@ possibly more. Pretty much everything in the game.</p>
             <div class="content"><pre><code class="lang-coffeescript">require <span class="string">"./setup"</span>
 
 Canvas = require <span class="string">"touch-canvas"</span>
+Sprite = require <span class="string">"sprite"</span>
 
 App = require <span class="string">"./pixie"</span>
 
@@ -49,7 +50,22 @@ canvas = Canvas
 
 $(<span class="string">"body"</span>).append canvas.element()
 
-canvas.fill <span class="string">"#F00"</span></code></pre>
+canvas.fill <span class="string">"#000"</span>
+
+global.canvas = canvas
+
+images = JSON.parse(localStorage.images)
+
+sprites = Object.keys(images).map (name) -&gt;
+  Sprite.load(images[name])
+
+setTimeout -&gt;
+  sprites.forEach (sprite, i) -&gt;
+    x = (i % <span class="number">32</span>).floor() * <span class="number">32</span>
+    y = (i / <span class="number">32</span>).floor() * <span class="number">32</span>
+
+    sprite.draw canvas, x, y
+, <span class="number">10</span></code></pre>
 </div>
         </li>
         
