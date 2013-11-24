@@ -44,6 +44,10 @@ Sprite = require <span class="string">"sprite"</span>
 
 App = require <span class="string">"./pixie"</span>
 
+{Size} = require <span class="string">"./lib/util"</span>
+
+tileSize = Size(<span class="number">32</span>, <span class="number">32</span>)
+
 canvas = Canvas
   width: App.width
   height: App.height
@@ -61,11 +65,13 @@ sprites = Object.keys(images).map (name) -&gt;
 
 setTimeout -&gt;
   sprites.forEach (sprite, i) -&gt;
-    x = (i % <span class="number">32</span>).floor() * <span class="number">32</span>
-    y = (i / <span class="number">32</span>).floor() * <span class="number">32</span>
+    {x, y} = tileSize.mapping(i).scale(tileSize)
 
     sprite.draw canvas, x, y
-, <span class="number">10</span></code></pre>
+, <span class="number">10</span>
+
+canvas.<span class="literal">on</span> <span class="string">"touch"</span>, (position) -&gt;
+  console.log position.scale(tileSize).floor()</code></pre>
 </div>
         </li>
         
