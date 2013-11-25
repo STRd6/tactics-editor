@@ -120,7 +120,10 @@ Size.prototype =
 
   <span class="comment"># TODO: Better name?</span>
   mapping: (n) -&gt;
-    Point(n % <span class="property">@width</span>, n / <span class="property">@width</span>).floor()
+    <span class="keyword">if</span> n.x?
+      n.x + n.y * <span class="property">@width</span>
+    <span class="keyword">else</span>
+      Point(n % <span class="property">@width</span>, n / <span class="property">@width</span>).floor()
 
   each: (iterator) -&gt;
     [<span class="number">0.</span>..<span class="property">@height</span>].forEach (y) -&gt;

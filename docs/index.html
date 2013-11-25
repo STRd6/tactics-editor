@@ -46,6 +46,7 @@ App = require <span class="string">"./pixie"</span>
 
 {Size} = require <span class="string">"./lib/util"</span>
 
+tileExtent = Size(<span class="number">32</span>, <span class="number">18</span>)
 tileSize = Size(<span class="number">32</span>, <span class="number">32</span>)
 
 canvas = Canvas
@@ -70,8 +71,18 @@ setTimeout -&gt;
     sprite.draw canvas, x, y
 , <span class="number">10</span>
 
+<span class="function"><span class="title">spriteToDataURL</span></span> = (sprite) -&gt;
+  tmpCanvas = Canvas sprite
+
+  sprite.draw(tmpCanvas, <span class="number">0</span>, <span class="number">0</span>)
+
+  tmpCanvas.element().toDataURL()
+
 canvas.<span class="literal">on</span> <span class="string">"touch"</span>, (position) -&gt;
-  console.log position.scale(tileSize).floor()</code></pre>
+  p = position.scale(tileExtent).floor()
+  n = tileSize.mapping(p)
+
+  console.log spriteToDataURL sprites[n]</code></pre>
 </div>
         </li>
         
