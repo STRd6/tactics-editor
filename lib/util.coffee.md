@@ -36,7 +36,10 @@ A 2d extent.
 
       # TODO: Better name?
       mapping: (n) ->
-        Point(n % @width, n / @width).floor()
+        if n.x?
+          n.x + n.y * @width
+        else
+          Point(n % @width, n / @width).floor()
 
       each: (iterator) ->
         [0...@height].forEach (y) ->

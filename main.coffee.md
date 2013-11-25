@@ -15,6 +15,7 @@ Tilesets and images too.
 
     {Size} = require "./lib/util"
 
+    tileExtent = Size(32, 18)
     tileSize = Size(32, 32)
 
     canvas = Canvas
@@ -39,5 +40,15 @@ Tilesets and images too.
         sprite.draw canvas, x, y
     , 10
 
+    spriteToDataURL = (sprite) ->
+      tmpCanvas = Canvas sprite
+
+      sprite.draw(tmpCanvas, 0, 0)
+
+      tmpCanvas.element().toDataURL()
+
     canvas.on "touch", (position) ->
-      console.log position.scale(tileSize).floor()
+      p = position.scale(tileExtent).floor()
+      n = tileSize.mapping(p)
+
+      console.log spriteToDataURL sprites[n]
